@@ -25,7 +25,7 @@ class ScreenBViewController: UIViewController {
         
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.tintColor = .purple
+        backButton.tintColor = UIColor(rgb: 0x554bf0)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
@@ -40,9 +40,23 @@ class ScreenBViewController: UIViewController {
         
         chooseUserButton.setTitle("Choose a User", for: .normal)
         chooseUserButton.setTitleColor(.white, for: .normal)
-        chooseUserButton.backgroundColor = .orange
-        chooseUserButton.layer.cornerRadius = 8
+        chooseUserButton.backgroundColor = UIColor(rgb: 0x2B637B)
+        chooseUserButton.layer.cornerRadius = 10
         chooseUserButton.addTarget(self, action: #selector(chooseUserTapped), for: .touchUpInside)
+        
+        var attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: UIColor.white,
+            .kern: 0.1,
+        ]
+        
+        let attributedTitle = NSMutableAttributedString(string: "Choose a User", attributes: attributes)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.5
+        paragraphStyle.alignment = .center
+        attributes[.paragraphStyle] = paragraphStyle
+        
+        chooseUserButton.setAttributedTitle(attributedTitle, for: .normal)
         
         view.addSubview(headerView)
         view.addSubview(welcomeLabel)

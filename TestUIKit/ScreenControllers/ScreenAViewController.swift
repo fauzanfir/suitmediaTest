@@ -2,6 +2,7 @@ import UIKit
 
 class ScreenAViewController: UIViewController {
     private let backgroundCircleImageView = UIImageView()
+    private let backgroundImageView = UIImageView()
     private let logoImageView = UIImageView()
     private let nameTextField = UITextField()
     private let sentenceTextField = UITextField()
@@ -18,37 +19,82 @@ class ScreenAViewController: UIViewController {
     }
     
     private func setupViews() {
+        let font = UIFont(name: "Poppins", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
         view.backgroundColor = .white
         
-        backgroundCircleImageView.backgroundColor = .gray.withAlphaComponent(0.2)
-        backgroundCircleImageView.layer.cornerRadius = 55 // Larger circle radius
+        backgroundImageView.image = UIImage(named: "Screen1BG")
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backgroundImageView)
+        
+        backgroundCircleImageView.backgroundColor = .white.withAlphaComponent(0.4)
+        backgroundCircleImageView.layer.cornerRadius = 58 // Larger circle radius
         backgroundCircleImageView.layer.masksToBounds = true
         backgroundCircleImageView.translatesAutoresizingMaskIntoConstraints = false
         
         logoImageView.image = UIImage(systemName: "person.fill.badge.plus") // Example icon
         logoImageView.contentMode = .scaleAspectFit
-        logoImageView.tintColor = .black // Adjust the logo color if needed
+        logoImageView.tintColor = .white // Adjust the logo color if needed
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        nameTextField.borderStyle = .roundedRect
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 50))
+        
         nameTextField.placeholder = "Name"
+        nameTextField.backgroundColor = .white
+        nameTextField.layer.cornerRadius = 10
         nameTextField.addTarget(self, action: #selector(nameTextFieldChanged(_:)), for: .editingChanged)
+        nameTextField.leftView = paddingView
+        nameTextField.leftViewMode = .always
         
-        sentenceTextField.borderStyle = .roundedRect
+        let paddingView2 = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 50))
+        
         sentenceTextField.placeholder = "Palindrome"
+        sentenceTextField.backgroundColor = .white
+        sentenceTextField.layer.cornerRadius = 10
         sentenceTextField.addTarget(self, action: #selector(sentenceTextFieldChanged(_:)), for: .editingChanged)
+        sentenceTextField.leftView = paddingView2
+        sentenceTextField.leftViewMode = .always
         
-        checkButton.setTitle("Check", for: .normal)
+        
+        checkButton.setTitle("CHECK", for: .normal)
         checkButton.setTitleColor(.white, for: .normal)
-        checkButton.backgroundColor = .blue
-        checkButton.layer.cornerRadius = 8
+        checkButton.backgroundColor = UIColor(rgb: 0x2B637B)
+        checkButton.layer.cornerRadius = 10
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        nextButton.setTitle("Next", for: .normal)
+        var attributes1: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: UIColor.white,
+            .kern: 0.1,
+        ]
+        
+        let attributedTitle1 = NSMutableAttributedString(string: "CHECK", attributes: attributes1)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.5 
+        paragraphStyle.alignment = .center
+        attributes1[.paragraphStyle] = paragraphStyle
+        
+        checkButton.setAttributedTitle(attributedTitle1, for: .normal)
+        
+        nextButton.setTitle("NEXT", for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.backgroundColor = .green
-        nextButton.layer.cornerRadius = 8
+        nextButton.backgroundColor = UIColor(rgb: 0x2B637B)
+        nextButton.layer.cornerRadius = 10
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        
+        var attributes2: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: UIColor.white,
+            .kern: 0.1,
+        ]
+        
+        let attributedTitle2 = NSMutableAttributedString(string: "NEXT", attributes: attributes2)
+        let paragraphStyle2 = NSMutableParagraphStyle()
+        paragraphStyle2.lineHeightMultiple = 1.5
+        paragraphStyle2.alignment = .center
+        attributes2[.paragraphStyle] = paragraphStyle2
+        
+        nextButton.setAttributedTitle(attributedTitle2, for: .normal)
         
         view.addSubview(backgroundCircleImageView)
         view.addSubview(logoImageView)
@@ -66,10 +112,15 @@ class ScreenAViewController: UIViewController {
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            backgroundCircleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backgroundCircleImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
             backgroundCircleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundCircleImageView.widthAnchor.constraint(equalToConstant: 110), // Larger size
-            backgroundCircleImageView.heightAnchor.constraint(equalToConstant: 110), // Larger size
+            backgroundCircleImageView.widthAnchor.constraint(equalToConstant: 116), // Larger size
+            backgroundCircleImageView.heightAnchor.constraint(equalToConstant: 116), // Larger size
             
             logoImageView.centerXAnchor.constraint(equalTo: backgroundCircleImageView.centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: backgroundCircleImageView.centerYAnchor),
@@ -77,24 +128,24 @@ class ScreenAViewController: UIViewController {
             logoImageView.heightAnchor.constraint(equalToConstant: 30), // Smaller logo size
             
             nameTextField.topAnchor.constraint(equalTo: backgroundCircleImageView.bottomAnchor, constant: 60),
-            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            nameTextField.heightAnchor.constraint(equalToConstant: 40),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            nameTextField.heightAnchor.constraint(equalToConstant: 41),
             
             sentenceTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 20),
-            sentenceTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            sentenceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            sentenceTextField.heightAnchor.constraint(equalToConstant: 40),
+            sentenceTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            sentenceTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            sentenceTextField.heightAnchor.constraint(equalToConstant: 41),
             
             checkButton.topAnchor.constraint(equalTo: sentenceTextField.bottomAnchor, constant: 50),
-            checkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            checkButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            checkButton.heightAnchor.constraint(equalToConstant: 40),
+            checkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            checkButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            checkButton.heightAnchor.constraint(equalToConstant: 41),
             
             nextButton.topAnchor.constraint(equalTo: checkButton.bottomAnchor, constant: 20),
-            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            nextButton.heightAnchor.constraint(equalToConstant: 40)
+            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            nextButton.heightAnchor.constraint(equalToConstant: 41)
         ])
     }
     
@@ -132,4 +183,22 @@ class ScreenAViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+}
+
+extension UIColor {
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgb: Int) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF
+       )
+   }
 }

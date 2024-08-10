@@ -10,10 +10,9 @@ class ScreenCViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupHeader()
         setupTableView()
         fetchData(page: currentPage)
-        
-        setupHeader()
     }
     
     private func setupHeader() {
