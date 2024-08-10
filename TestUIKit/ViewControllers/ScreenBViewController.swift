@@ -17,6 +17,7 @@ class ScreenBViewController: UIViewController {
     }
     
     private func setupViews() {
+        let font = UIFont(name: "Poppins", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
         view.backgroundColor = .white
         
         headerView.backgroundColor = .gray.withAlphaComponent(0.2)

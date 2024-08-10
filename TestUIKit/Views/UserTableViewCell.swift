@@ -5,6 +5,7 @@ class UserTableViewCell: UITableViewCell {
     let avatarImageView = UIImageView()
     let nameLabel = UILabel()
     let emailLabel = UILabel()
+    private let bottomBorder = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,9 +30,13 @@ class UserTableViewCell: UITableViewCell {
         emailLabel.textColor = .gray
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        bottomBorder.backgroundColor = .gray.withAlphaComponent(0.2)
+        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
+        
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(emailLabel)
+        contentView.addSubview(bottomBorder)  // Add the custom border to the cell
     }
     
     private func setupConstraints() {
@@ -48,7 +53,12 @@ class UserTableViewCell: UITableViewCell {
             emailLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 25),
             emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
             emailLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-            emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25)
+            emailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -25),
+            
+            bottomBorder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            bottomBorder.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            bottomBorder.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     

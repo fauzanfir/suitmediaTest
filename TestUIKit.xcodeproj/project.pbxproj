@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		764085E72C67F13D006EE9DB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764085E62C67F13D006EE9DB /* User.swift */; };
+		764085E92C67F15B006EE9DB /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764085E82C67F15B006EE9DB /* NetworkingManager.swift */; };
 		76FECE902C6760C800289272 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FECE8F2C6760C800289272 /* AppDelegate.swift */; };
 		76FECE922C6760C800289272 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FECE912C6760C800289272 /* SceneDelegate.swift */; };
 		76FECE972C6760C800289272 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76FECE952C6760C800289272 /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		764085E62C67F13D006EE9DB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		764085E82C67F15B006EE9DB /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		76FECE8C2C6760C800289272 /* TestUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76FECE8F2C6760C800289272 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76FECE912C6760C800289272 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		764085E22C67F0C5006EE9DB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				764085E62C67F13D006EE9DB /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		764085E32C67F0D1006EE9DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				76FECEC72C67BC3B00289272 /* UserTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		764085E42C67F11B006EE9DB /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				764085E82C67F15B006EE9DB /* NetworkingManager.swift */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
 		76FECE832C6760C800289272 = {
 			isa = PBXGroup;
 			children = (
@@ -105,14 +133,16 @@
 		76FECE8E2C6760C800289272 /* TestUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				76FECEC02C67648000289272 /* ScreenControllers */,
+				764085E42C67F11B006EE9DB /* Networks */,
+				764085E32C67F0D1006EE9DB /* Views */,
+				764085E22C67F0C5006EE9DB /* Models */,
+				76FECEC02C67648000289272 /* ViewControllers */,
 				76FECE8F2C6760C800289272 /* AppDelegate.swift */,
 				76FECE912C6760C800289272 /* SceneDelegate.swift */,
 				76FECE952C6760C800289272 /* Main.storyboard */,
 				76FECE982C6760CB00289272 /* Assets.xcassets */,
 				76FECE9A2C6760CB00289272 /* LaunchScreen.storyboard */,
 				76FECE9D2C6760CB00289272 /* Info.plist */,
-				76FECEC72C67BC3B00289272 /* UserTableViewCell.swift */,
 			);
 			path = TestUIKit;
 			sourceTree = "<group>";
@@ -134,14 +164,14 @@
 			path = TestUIKitUITests;
 			sourceTree = "<group>";
 		};
-		76FECEC02C67648000289272 /* ScreenControllers */ = {
+		76FECEC02C67648000289272 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				76FECEC12C67649E00289272 /* ScreenAViewController.swift */,
 				76FECEC32C6764FC00289272 /* ScreenBViewController.swift */,
 				76FECEC52C67652600289272 /* ScreenCViewController.swift */,
 			);
-			path = ScreenControllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,7 +310,9 @@
 				76FECEC22C67649E00289272 /* ScreenAViewController.swift in Sources */,
 				76FECE922C6760C800289272 /* SceneDelegate.swift in Sources */,
 				76FECEC82C67BC3B00289272 /* UserTableViewCell.swift in Sources */,
+				764085E92C67F15B006EE9DB /* NetworkingManager.swift in Sources */,
 				76FECEC42C6764FC00289272 /* ScreenBViewController.swift in Sources */,
+				764085E72C67F13D006EE9DB /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

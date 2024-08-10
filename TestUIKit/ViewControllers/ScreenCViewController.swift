@@ -20,7 +20,7 @@ class ScreenCViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        backButton.tintColor = .purple
+        backButton.tintColor = UIColor(rgb: 0x554bf0)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
@@ -29,7 +29,7 @@ class ScreenCViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.register(UserTableViewCell.self, forCellReuseIdentifier: "UserCell")
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
         tableView.allowsSelection = true
         
         view.addSubview(tableView)
@@ -79,28 +79,19 @@ class ScreenCViewController: UIViewController, UITableViewDataSource, UITableVie
     
     private func fetchData(page: Int) {
         isLoading = true
-        let urlString = "https://reqres.in/api/users?page=\(page)&per_page=10"
-        guard let url = URL(string: urlString) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                self.isLoading = false
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(UserResponse.self, from: data)
-                self.users.append(contentsOf: response.data)
-                DispatchQueue.main.async {
+        NetworkManager.shared.fetchUsers(page: page) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .success(let users):
+                    self.users.append(contentsOf: users)
                     self.tableView.reloadData()
-                    self.isLoading = false
+                case .failure(let error):
+                    print("Failed to fetch users:", error)
                 }
-            } catch {
-                print("Failed to decode JSON:", error)
                 self.isLoading = false
             }
         }
-        task.resume()
     }
     
     @objc private func refreshData() {
@@ -113,16 +104,4 @@ class ScreenCViewController: UIViewController, UITableViewDataSource, UITableVie
     @objc private func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-}
-
-struct UserResponse: Codable {
-    let data: [User]
-}
-
-struct User: Codable {
-    let id: Int
-    let email: String
-    let first_name: String
-    let last_name: String
-    let avatar: String
 }
